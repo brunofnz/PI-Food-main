@@ -2,6 +2,11 @@ require('dotenv').config();
 const { Recipe, Diet } = require('../db');
 const { messageApi } = require('../helpers');
 
+const dietAsync = async (name) => {
+    let dietFind = await Diet.findOne({ where: { name } });
+    return dietFind;
+}
+
 const seedRecipes = async (req,res) => {
     try {
         const data = [
@@ -28,15 +33,46 @@ const seedRecipes = async (req,res) => {
                         ]
                     },
                 ],
-                image: 'https://i.blogs.es/9058b3/receta-de-helado-de-yogur/840_560.jpg'
+                image: 'https://i.blogs.es/9058b3/receta-de-helado-de-yogur/840_560.jpg',
+                diets: [
+                    'gluten free',
+                    'ketogenic',
+                ],
             },
         ]
-        await data?.map(recipe => {
-            Recipe.create(recipe) 
-        })
-        res.status(200).send({ 
+        await Promise.all(
+            await data?.map(async (recipe) => {
+                const {
+                    title,
+                    summary,
+                    health_score,
+                    steps,
+                    image,
+                    diets,
+                } = recipe
+                const recipeValidate = await Recipe.findOne({
+                    where: {title}
+                })
+                if (!recipeValidate) {
+                    const recipeCreate = await Recipe.create({ 
+                        title, 
+                        summary, 
+                        health_score, 
+                        steps, 
+                        image, 
+                    })
+                    diets.map(async (diet) => {
+                        let dietFinded = await dietAsync(diet);
+                        if(dietFinded){
+                            recipeCreate.addDiet(dietFinded.id);
+                        }
+                    })
+                }
+            })
+        )
+        .then(() => res.status(200).send({ 
             msg: 'Seed recipes success!',
-        }) 
+        }))
     } catch (error) {
         res.status(500).send({ 
             msg: 'Data not loaded.',
