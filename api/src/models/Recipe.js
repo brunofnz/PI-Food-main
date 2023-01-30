@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     health_score: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     steps: {
