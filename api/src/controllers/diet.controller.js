@@ -15,7 +15,7 @@ const seedDiets = async (req,res) => {
             'low fodmap',
             'whole30',
         ]
-        await data.results?.map(diet => {
+        await data.map(diet => {
             Diet.create({
                 name: diet,
             }) 
