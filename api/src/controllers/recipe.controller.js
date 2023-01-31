@@ -1,6 +1,11 @@
 require('dotenv').config();
+const axios = require('axios');
 const { Recipe, Diet } = require('../db');
-const { messageApi } = require('../helpers');
+const { messageApi, filterRecipeDataApi,  } = require('../helpers');
+const {
+    URL_RECIPES,
+} = process.env;
+const { Sequelize:{Op} } = require('sequelize');
 
 const dietAsync = async (name) => {
     let dietFind = await Diet.findOne({ where: { name } });
@@ -83,25 +88,76 @@ const seedRecipes = async (req,res) => {
 
 const getRecipes = async (req,res) => {
     try {
-        const dataDb = await Recipe.findAll({                    
-            attributes: [
-                'id',
-                'title',
-                'summary',
-                'health_score',
-                'steps',
-                'image',
-            ],
-            include: {
-                model: Diet,
-                attributes: ['name']
+        const array9 = [];
+        const { name } = req.query;
+        if( name ) {
+            const findRecipe = await Recipe.findAll({     
+                where: {
+                    title: {
+                        [Op.like]: `%${name}%`,
+                    }
+                },
+                attributes: [
+                    'id',
+                    'title',
+                    'summary',
+                    'health_score',
+                    'steps',
+                    'image',
+                ],
+                include: {
+                    model: Diet,
+                    attributes: ['name']
+                }
+            })
+            if (findRecipe?.length > 0) {
+                findRecipe?.map(recipe => array9.push(recipe))
             }
-        })
-        res.status(200).send(
-            messageApi(true, 'Recipes data founds!', dataDb)
-        ) 
+            const { data:{ results } } = await axios.get(`${URL_RECIPES}&titleMatch=${name}`);
+            const suma = results?.length + findRecipe?.length >= 9 ? 9 - findRecipe?.length : results?.length - findRecipe?.length
+            if(results?.length > 0) {
+                for (let i = 0; i < suma ; i++) {
+                    array9.push({
+                            id: results[i].id,
+                            title: results[i].title,
+                            summary: results[i].summary,
+                            health_score: results[i].healthScore,
+                            steps: results[i].analyzedInstructions[0]?.steps,
+                            image: results[i].image,
+                            diets: results[i].diets,
+                        });
+                }
+            }
+            if (findRecipe?.length === 0 && results?.length === 0)  res.status(404).send(message(false, `Not found recipe ${title}.`))
+            res.status(200).send(array9)
+        } else {
+            const { data:{ results } } = await axios.get(`${URL_RECIPES}`)
+            const dataApi = await filterRecipeDataApi(results)
+            const dataDb = await Recipe.findAll({                    
+                attributes: [
+                    'id',
+                    'title',
+                    'summary',
+                    'health_score',
+                    'steps',
+                    'image',
+                ],
+                include: {
+                    model: Diet,
+                    attributes: ['name']
+                }
+            })
+            res.status(200).send(
+                messageApi(
+                    true, 
+                    'Recipes data founds!', 
+                    [...dataDb, ...dataApi]
+                )
+            )         
+        }
     } catch (error) {
-        res.status(404).send(messageApi(false, 'Recipes data not found!')) 
+        console.log(`🚀 ~ file: recipe.controller.js:158 ~ getRecipes ~ error`, error)
+        res.status(404).send(messageApi(false, 'Recipes data not found! Please server logs')) 
     }
 }
 
