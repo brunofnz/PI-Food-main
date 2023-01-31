@@ -1,0 +1,48 @@
+.container {
+    position: fixed;
+    z-index: 1500;
+    background-color: #F49334;
+  
+    width: 100vw;
+    height: 100vh;
+  
+    box-sizing: border-box;
+  
+    color: black;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .displayLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .presentacionText {
+    max-width: 30%;
+    font-size: 33px;
+  }
+  
+  .buttonStart {
+    color: white;
+    margin-top: 50px;
+    font-size: 30px;
+    width: 200px;
+    background: black;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+  
+  }
+  
+  .buttonStart:hover {
+    background-color: #DDDEBD;
+    color: black;
+  }
