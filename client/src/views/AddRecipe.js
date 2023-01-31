@@ -1,8 +1,11 @@
 import React from 'react'
+import { Header } from '../components'
 
 const AddRecipe = () => {
   return (
-    <div>AddRecipe</div>
+    <>
+      <Header/>
+    </>
   )
 }
 
