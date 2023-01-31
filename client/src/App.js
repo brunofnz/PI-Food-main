@@ -1,10 +1,18 @@
 import './App.css';
+import { Route, Switch} from 'react-router-dom';
+import { LandingPage, AddRecipe, DetailRecipe, Home, PageNotFound404 } from './views';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Food</h1>
-    </div>
+    <>
+      <Switch>
+        <Route exact path='/' component={LandingPage}/>
+        <Route exact path='/recipes' component={Home}/>
+        <Route exact path='/recipes/:idRecipe' component={DetailRecipe}/>
+        <Route exact path='/add' component={AddRecipe}/>
+        <Route path='*' component={PageNotFound404} />
+      </Switch>
+    </>
   );
 }
 
