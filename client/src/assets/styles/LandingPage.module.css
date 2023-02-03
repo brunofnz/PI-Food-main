@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Galada&display=swap');
+
 .container {
     position: fixed;
     z-index: 1500;
     background-color: #F49334;
+    font-family: 'Galada', cursive;
   
     width: 100vw;
     height: 100vh;
@@ -39,6 +42,7 @@
     -moz-border-radius: 25px;
     -ms-border-radius: 25px;
     -o-border-radius: 25px;
+    font-family: 'Galada', cursive;
   
   }
   

@@ -1,4 +1,5 @@
 const { Diet } = require('../db');
+const { messageApi } = require('../helpers');
 
 const seedDiets = async (req,res) => {
     try {
@@ -20,9 +21,7 @@ const seedDiets = async (req,res) => {
                 name: diet,
             }) 
         })
-        res.status(200).send({ 
-            msg: 'Seed diets success!',
-        }) 
+        res.status(200).send(messageApi(true, 'Seed diets success!', 'GET /diets'))
     } catch (error) {
         res.status(404).send('Not found data! Please server logs.');
     }
@@ -30,7 +29,8 @@ const seedDiets = async (req,res) => {
 
 const getDiet = async (req,res) => {
     try {
-        res.status(200).send(await Diet.findAll());
+        const diets = await Diet.findAll()
+        res.status(200).send(messageApi(true, 'Diets found!', diets));
     } catch (error) {
         res.status(404).send('Not found data! Please server logs.');
     }

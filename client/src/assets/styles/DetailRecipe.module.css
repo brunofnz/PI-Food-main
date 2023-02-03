@@ -1,0 +1,134 @@
+.detailContent {
+    width: 100%;
+     
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    color: white;
+  }
+  
+  .containerRecipe {
+    width: 60%;
+  
+  }
+  
+  .title {
+    font-size: 40px;
+  
+  }
+  
+  .containerInfoRecipe {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: flex-start;
+    min-height: 500px;
+    height: 520px;
+    max-height: 522px;
+    box-sizing: border-box;
+  }
+  
+  .image {
+  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  
+    width: 50%;
+    height: 100%;
+  }
+  
+  .infoRecipe {
+    width: 400px;
+  }
+  
+  .nameRecipe {
+    font-size: 38px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .titleDiet {
+    font-size: 26px;
+    margin: 0;
+  }
+  
+  .contentDiet {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-bottom: 15px;
+  }
+  
+  .diet {
+    padding: 5px 8px;
+    background-color: #DDDEBD;
+    color: black;
+    margin: 0;
+    font-weight: 600;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+  }
+  
+  
+  .titleRealsed {
+    font-size: 26px;
+    margin: 0;
+  }
+  
+  .containerDescription {
+    height: 250px;
+    overflow: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  
+  .containerDescription::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  .containerDescription::-webkit-scrollbar-track {
+    background: orange;        /* color of the tracking area */
+  }
+  
+  .containerDescription::-webkit-scrollbar-thumb {
+    background-color: #D0E82B;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid black;  /* creates padding around scroll thumb */
+  }
+  
+  .textDescription {
+    height: 100%;
+    /* text-overflow:ellipsis; */
+  }
+  
+  .titleDescirption {
+    margin: auto;
+    font-size: 26px;
+  }
+  
+  .containerSpecs {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .font {
+    font-size: 30px;
+  }
+  
+  

@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Galada&display=swap');
+
+.container {
+  width: 90%;
+  height: 90%;
+  margin: 20px auto;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  /* border: 1px black solid; */
+  align-items: center;
+  text-align: center;
+}
+
+.container .containerForm {
+  /* border: 1px black solid; */
+  height: 100%;
+  width: 100%;
+  background-color: #DDDEBD;
+  border-radius: 10px;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container .containerForm .error {
+  margin-top: 10px;
+}
+
+.container .containerSteps {
+  /* border: 1px black solid; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 10px; */
+  background-color: #DDDEBD;
+  border-radius: 10px;
+}
+
+.step::-webkit-scrollbar {
+  width: 12px;
+}
+
+.step::-webkit-scrollbar-track {
+  background-color: #E27713;     /* color of the tracking area */
+}
+
+.step::-webkit-scrollbar-thumb {
+  background-color: black;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid #E27713;  /* creates padding around scroll thumb */
+}
+
+.containerSelectItems {
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.inputSelect option {
+  font-family: 'Galada', cursive;
+    font-size: 18px;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.buttonLinks {
+  font-family: 'Galada', cursive;
+  background: black;
+  width: 100%;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 30px;
+  font-size: 18px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  cursor: pointer;
+}
+
+.buttonLinksDisabled {
+  font-family: 'Galada', cursive;
+  background: rgb(80, 78, 78);
+  width: 100%;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 30px;
+  font-size: 18px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  cursor: pointer;
+}
+.container .containerSteps .buttonLinks {
+  margin-top: 10px;
+  font-family: 'Galada', cursive;
+  background: black;
+  width: 100%;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 30px;
+  font-size: 18px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  cursor: pointer;
+}
+
+.textarea {
+  color: black;
+  background-color: white;
+  margin-top: 5px;
+  border-radius: 25px 0px 0px 25px;
+  width: 300px;
+  height: 100px;
+  overflow-y: scroll;
+  padding: 10px 25px;  
+  resize: none;
+}
+
+.textarea::-webkit-scrollbar {
+  width: 12px;
+}
+
+.textarea::-webkit-scrollbar-track {
+  background-color: #DDDEBD;     /* color of the tracking area */
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background-color: black;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid #DDDEBD;  /* creates padding around scroll thumb */
+}
+
+
+
+/* ! CSS FORM*/
+
+.container .containerForm .selectItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Galada', cursive;
+  background: #E27713;
+  margin-right: 3px;
+  margin-bottom: 15px;
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 30px;
+  font-size: 15px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  cursor: pointer;
+}
+
+.container .containerForm .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.container .containerForm .lebelForm {
+  color: black;
+  font-family: 'Arial-bold', cursive;
+  width: 300px;
+  padding: 10px 25px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border: none;
+}
+
+.container .containerForm .inputForm {
+  width: 90%;
+  padding: 10px 25px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border: none;
+
+}
+
+.container .containerForm .inputForm::placeholder {
+    font-family: 'Arial-bold', cursive;
+    font-size: 18px;
+  font-weight: 100;
+  font-style: italic;
+}
+
+/* ! CSS STEPS */
+
+.container .containerSteps .lebelForm {
+  color: black;
+  font-family: 'Arial-bold', cursive;
+  width: 300px;
+  padding: 10px 25px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border: none;
+}
+
+.inputForm {
+  width: 300px;
+  padding: 10px 25px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border: none;
+
+}
+
+.inputForm::placeholder {
+    font-family: 'Arial-bold', cursive;
+    font-size: 18px;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.container .containerForm .inputSelect {
+  width: 350px;
+  padding: 10px 25px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border: none;
+  font-family: 'Arial-bold', cursive;
+
+}
+
+
+
+
+.container .containerSteps .inputForm {
+  width: 200px;
+  padding: 10px 25px;
+  margin-top: 10px;
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border: none;
+}
+
+.container .containerSteps .inputForm::placeholder {
+  font-family: 'Arial-bold', cursive;
+  font-size: 18px;
+  font-weight: 100;
+  font-style: italic;
+}

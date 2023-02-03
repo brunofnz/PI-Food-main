@@ -1,9 +1,10 @@
 require('dotenv').config();
 const axios = require('axios');
 const { Recipe, Diet } = require('../db');
-const { messageApi, filterRecipeDataApi,  } = require('../helpers');
+const { messageApi, filterRecipeDataApi, filterRecipeDetailDataApi,  } = require('../helpers');
 const {
     URL_RECIPES,
+    API_KEY
 } = process.env;
 const { Sequelize:{Op} } = require('sequelize');
 
@@ -17,6 +18,150 @@ const seedRecipes = async (req,res) => {
         const data = [
             {
                 title: 'Ice Cream Yogur',
+                summary: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem 
+                Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer 
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only 
+                five centuries.`,
+                health_score: 38,
+                steps:[
+                    {
+                        number: 1,
+                        step: "Take some yogurt in your favorite flavor and add 1 container to your blender.",
+                        ingredients: [
+                            {
+                                "name": "yogurt",
+                            }
+                        ],
+                        equipment: [
+                            {
+                                "name": "blender",
+                            }
+                        ]
+                    },
+                ],
+                image: 'https://i.blogs.es/9058b3/receta-de-helado-de-yogur/840_560.jpg',
+                diets: [
+                    'gluten free',
+                    'vegetarian',
+                ],
+            },
+            {
+                title: 'Ice Cream Yogur',
+                summary: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem 
+                Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer 
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only 
+                five centuries.`,
+                health_score: 38,
+                steps:[
+                    {
+                        number: 1,
+                        step: "Take some yogurt in your favorite flavor and add 1 container to your blender.",
+                        ingredients: [
+                            {
+                                "name": "yogurt",
+                            }
+                        ],
+                        equipment: [
+                            {
+                                "name": "blender",
+                            }
+                        ]
+                    },
+                ],
+                image: 'https://i.blogs.es/9058b3/receta-de-helado-de-yogur/840_560.jpg',
+                diets: [
+                    'vegan',
+                ],
+            },
+            {
+                title: 'Polenta',
+                summary: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem 
+                Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer 
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only 
+                five centuries.`,
+                health_score: 38,
+                steps:[
+                    {
+                        number: 1,
+                        step: "Take some yogurt in your favorite flavor and add 1 container to your blender.",
+                        ingredients: [
+                            {
+                                "name": "yogurt",
+                            }
+                        ],
+                        equipment: [
+                            {
+                                "name": "blender",
+                            }
+                        ]
+                    },
+                ],
+                image: 'https://i.blogs.es/9058b3/receta-de-helado-de-yogur/840_560.jpg',
+                diets: [
+                    'gluten free',
+                    'ketogenic',
+                ],
+            },
+            {
+                title: 'Macarron con queso',
+                summary: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem 
+                Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer 
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only 
+                five centuries.`,
+                health_score: 38,
+                steps:[
+                    {
+                        number: 1,
+                        step: "Take some yogurt in your favorite flavor and add 1 container to your blender.",
+                        ingredients: [
+                            {
+                                "name": "yogurt",
+                            }
+                        ],
+                        equipment: [
+                            {
+                                "name": "blender",
+                            }
+                        ]
+                    },
+                ],
+                image: 'https://i.blogs.es/9058b3/receta-de-helado-de-yogur/840_560.jpg',
+                diets: [
+                    'gluten free',
+                    'ketogenic',
+                ],
+            },
+            {
+                title: 'Macarron con verduras',
+                summary: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem 
+                Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer 
+                took a galley of type and scrambled it to make a type specimen book. It has survived not only 
+                five centuries.`,
+                health_score: 38,
+                steps:[
+                    {
+                        number: 1,
+                        step: "Take some yogurt in your favorite flavor and add 1 container to your blender.",
+                        ingredients: [
+                            {
+                                "name": "yogurt",
+                            }
+                        ],
+                        equipment: [
+                            {
+                                "name": "blender",
+                            }
+                        ]
+                    },
+                ],
+                image: 'https://i.blogs.es/9058b3/receta-de-helado-de-yogur/840_560.jpg',
+                diets: [
+                    'gluten free',
+                    'ketogenic',
+                ],
+            },
+            {
+                title: 'Pastel de papa',
                 summary: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem 
                 Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer 
                 took a galley of type and scrambled it to make a type specimen book. It has survived not only 
@@ -75,9 +220,7 @@ const seedRecipes = async (req,res) => {
                 }
             })
         )
-        .then(() => res.status(200).send({ 
-            msg: 'Seed recipes success!',
-        }))
+        .then(() => res.status(200).send(messageApi(true, 'Seed recipes success!', 'GET /recipes')))
     } catch (error) {
         res.status(500).send({ 
             msg: 'Data not loaded.',
@@ -132,7 +275,8 @@ const getRecipes = async (req,res) => {
             res.status(200).send(messageApi(true, 'Found recipes.',array9))
         } else {
             const { data:{ results } } = await axios.get(`${URL_RECIPES}`)
-            const dataApi = await filterRecipeDataApi(results)
+            const dataApi = await filterRecipeDataApi(results) 
+            // const dataApi = null
             const dataDb = await Recipe.findAll({                    
                 attributes: [
                     'id',
@@ -147,11 +291,20 @@ const getRecipes = async (req,res) => {
                     attributes: ['name']
                 }
             })
+            let dataResponse = null
+            if (!dataApi && dataDb) {
+                dataResponse = dataDb
+            } else if (dataApi && !dataDb) {
+                dataResponse = dataApi
+            } else {
+                dataResponse = [...dataDb, ...dataApi]
+            }
             res.status(200).send(
                 messageApi(
                     true, 
                     'Recipes data founds!', 
-                    [...dataDb, ...dataApi]
+                    dataResponse
+                    // dataDb
                 )
             )         
         }
@@ -191,30 +344,14 @@ const getRecipeById = async (req,res) => {
                 res.status(404).send(messageApi(false,'Recipe not found'));
             }
         } else if(found === null){
-            const { data:{ 
-                id,
-                title,
-                summary,
-                healthScore,
-                analyzedInstructions,
-                image,
-                diets 
-            } } = await axios.get(`https://api.spoonacular.com/recipes/${idReceta}/information?apiKey=1ace762ad72d4ee7bc0da59cf3815ccc`);     
-            res.status(200).send(messageApi(true,'Recipe found', { 
-                id,
-                title,
-                summary,
-                health_score: healthScore,
-                steps: analyzedInstructions[0]?.steps,
-                image,
-                diets,
-            }))   
+            const { data } = await axios.get(`https://api.spoonacular.com/recipes/${idReceta}/information?apiKey=${API_KEY}`);     
+            res.status(200).send(messageApi(true,'Recipe found',  await filterRecipeDetailDataApi(data)))
         } else {
             res.status(400).send(messageApi(false, 'Bad Request'));
         }
     } catch (error) {
         console.log(`🚀 ~ file: recipe.controller.js:201 ~ getRecipeById ~ error`, error)
-        res.status(error.response.status).send(message(false, error.response.data.detail));
+        res.status(error.response.status).send(messageApi(false, 'Error! Id not found!'));
     }
 }
 
@@ -231,7 +368,7 @@ const createRecipe = async (req,res) => {
         if( 'string' !== typeof title) res.status(400).send(messageApi(false, `Bad Request! 'title' must be string`));
         if( 'string' !== typeof summary) res.status(400).send(messageApi(false, `Bad Request! 'summary' must be string`));
         if( 'string' !== typeof image) res.status(400).send(messageApi(false, `Bad Request! 'image' must be string`));
-        if( 'number' !== typeof health_score) res.status(400).send(messageApi(false, `Bad Request! 'health_score' must be string`));
+        if( 'number' !== typeof health_score) res.status(400).send(messageApi(false, `Bad Request! 'health_score' must be number`));
         if (!Array.isArray(diets)) {
             res.status(400).send(messageApi(false, `Bad Request! 'diets' must be object[] => [{id: string, name: string}]`));
         } 
